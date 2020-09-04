@@ -1,6 +1,7 @@
 
 # this is where document is uploaded to
-aws s3 ls s3://dusstack-dusstackdocumentss3bucket4tpr87vsjizdz5i-ki2qi1jk3j6d --recursive | grep test
+aws s3 ls s3://dusstack-dusstackdocumentss3bucket4tpr87vsjizdz5i-ki2qi1jk3j6d --recursive | grep charles-eaton
+aws s3 ls s3://dusstack-dusstackdocumentss3bucket4tpr87vsjizdz5i-ki2qi1jk3j6d --recursive | grep leanne-del-toso
 
 # Other s3 bucket
 aws s3 ls s3://dusstack-dusstackcoviddatabucket4tpr87vsjizdz5i9m-1im2qwfvel50c --recursive | grep wiki

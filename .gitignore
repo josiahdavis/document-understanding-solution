@@ -41,3 +41,5 @@ source/lib/cdk-textract-client-stack.js-e
 
 # Brazil
 Config
+
+__pycache__/
