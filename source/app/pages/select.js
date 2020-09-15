@@ -29,53 +29,53 @@ Select.propTypes = {
   dispatch: PropTypes.func,
 }
 const {
-  publicRuntimeConfig:{
+  publicRuntimeConfig: {
     isROMode
   }
 } = getConfig();
 function Select({ dispatch }) {
-  if(isROMode === 'true'){
+  if (isROMode === 'true') {
     const [modal, setModal] = React.useState(false)
     return (
-      <ModalContext.Provider value={{modal:modal, setModal:setModal}}>
+      <ModalContext.Provider value={{ modal: modal, setModal: setModal }}>
         <ContextModal onClose={() => setModal(false)} show={modal} modalTitle={"Cannot Upload Your Own Documents - Read Only Mode"}>
-        This DUS instance is running in Read-Only Mode which does not support uploading your own documents.
-        To use all the features of DUS, please deploy your own instance following the instructions
+          This DUS instance is running in Read-Only Mode which does not support uploading your own documents.
+          To use all the features of DUS, please deploy your own instance following the instructions
          <a href="https://github.com/awslabs/document-understanding-solution"> here.</a>
-          </ContextModal>
-          <div className={css.select}>
+        </ContextModal>
+        <div className={css.select}>
           <p>
             <Button inverted link={{ href: '/documents' }}>
               View Existing Documents
             </Button>
           </p>
-          <h2>Add some example documents</h2>
-          <SampleCollections />
+          {/* <h2>Add some example documents</h2>
+          <SampleCollections /> */}
           <h2>Or Upload your own documents</h2>
           <FileUpload />
         </div>
       </ModalContext.Provider>
     )
   }
-else {
-  return (
-    <div className={css.select}>
-      <p>
-        <Button inverted link={{ href: '/documents' }}>
-          View Existing Documents
+  else {
+    return (
+      <div className={css.select}>
+        <p>
+          <Button inverted link={{ href: '/documents' }}>
+            View Existing Documents
         </Button>
-      </p>
+        </p>
 
-      <h2>Upload your own documents</h2>
-      <FileUpload />
-      <h2>Or add some example documents</h2>
-      <SampleCollections />
-    </div>
-  )
+        <h2>Upload your own documents</h2>
+        <FileUpload />
+        {/* <h2>Or add some example documents</h2>
+      <SampleCollections /> */}
+      </div>
+    )
   }
 }
 
-Select.getInitialProps = function() {
+Select.getInitialProps = function () {
   return {
     pageTitle: 'Upload documents',
   }
