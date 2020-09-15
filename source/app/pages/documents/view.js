@@ -34,7 +34,7 @@ import {
 
 } from '../../store/entities/documents/actions'
 import { getDocumentById } from '../../store/entities/documents/selectors'
-import { setHeaderProps , setSelectedTrack} from '../../store/ui/actions'
+import { setHeaderProps, setSelectedTrack } from '../../store/ui/actions'
 import { getSelectedTrackId } from '../../store/ui/selectors'
 import { setCurrentPageNumber, setDocumentSearchQuery } from '../../store/entities/meta/actions'
 import { getDocumentSearchQuery, getCurrentPageNumber } from '../../store/entities/meta/selectors'
@@ -79,7 +79,7 @@ Document.defaultProps = {
   document: {},
 }
 
-Document.getInitialProps = function({ query, store }) {
+Document.getInitialProps = function ({ query, store }) {
   const state = store.getState()
   const { id } = query || {}
   const { documentName } = getDocumentById(state, id) || {}
@@ -124,10 +124,10 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
     const lines = getDocumentLines(document)
     const entities = getDocumentEntityPairs(document, COMPREHEND_SERVICE)
     const medicalEntities = getDocumentEntityPairs(document, COMPREHEND_MEDICAL_SERVICE)
-    return { pairs, tables, lines, entities , medicalEntities }
+    return { pairs, tables, lines, entities, medicalEntities }
     // eslint-disable-next-line
 
-  }, [document, document.textractResponse ,document.medicalComprehendResponse, document.comprehendResponse])
+  }, [document, document.textractResponse, document.medicalComprehendResponse, document.comprehendResponse])
 
   // Set the paged content for each tab
   const pageData = useMemo(() => {
@@ -136,9 +136,9 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
     const tables = docData.tables.filter(d => d.pageNumber === currentPageNumber)
     const entities = docData.entities.filter(d => d.pageNumber === currentPageNumber)
     const medicalEntities = docData.medicalEntities.filter(d => d.pageNumber === currentPageNumber)
-    return { lines, pairs, tables , entities , medicalEntities }
+    return { lines, pairs, tables, entities, medicalEntities }
     // eslint-disable-next-line
-  }, [document, document.textractResponse,document.comprehendMedicalResponse, currentPageNumber, docData.pairs, docData.entities , docData.medicalEntities , docData.tables])
+  }, [document, document.textractResponse, document.comprehendMedicalResponse, currentPageNumber, docData.pairs, docData.entities, docData.medicalEntities, docData.tables])
 
   const [tab, selectTab] = useState('search')
 
@@ -158,7 +158,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
       expires: 300,
     })
     window.open(url)
-  }, [ document])
+  }, [document])
 
   const downloadMedicalEntities = useCallback(async () => {
     const { resultDirectory } = document
@@ -166,7 +166,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
       expires: 300,
     })
     window.open(url)
-  }, [ document])
+  }, [document])
 
   const downloadMedicalICD10Ontologies = useCallback(async () => {
     const { resultDirectory } = document
@@ -174,7 +174,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
       expires: 300,
     })
     window.open(url)
-  }, [ document])
+  }, [document])
 
   const redactMatches = useCallback(async () => {
     dispatch(addRedactions(id, currentPageNumber, wordsMatchingSearch))
@@ -203,12 +203,12 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
 
   const redactAllValues = useCallback(
     async (bbox, pageNumber = currentPageNumber) => {
-       dispatch(addRedactions(id, currentPageNumber, pageData.pairs.map(p => p.valueBoundingBox)))
-  }, [currentPageNumber, dispatch, id, pageData.pairs])
+      dispatch(addRedactions(id, currentPageNumber, pageData.pairs.map(p => p.valueBoundingBox)))
+    }, [currentPageNumber, dispatch, id, pageData.pairs])
 
 
-  const redactEntityMatches = useCallback(async (pageNumber ,bboxlist) => {
-    dispatch(addRedactions(id, pageNumber,bboxlist.map(p => p)))
+  const redactEntityMatches = useCallback(async (pageNumber, bboxlist) => {
+    dispatch(addRedactions(id, pageNumber, bboxlist.map(p => p)))
   }, [currentPageNumber, dispatch, id])
 
   const contentRef = useRef()
@@ -291,7 +291,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
     [dispatch]
   )
 
-  const setHighlightedLine = useCallback(() => {}, [])
+  const setHighlightedLine = useCallback(() => { }, [])
 
 
 
@@ -313,30 +313,30 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 { id: 'kv', title: `Key-Value Pairs` },
                 { id: 'tables', title: `Tables` },
                 { id: 'entities', title: `Entities` },
-                { id: 'medical_entities', title: `Medical Entities` },
+                // { id: 'medical_entities', title: `Medical Entities` },
               ]}
             />
 
 
             {track === 'redaction' &&
-            document.redactions &&
-            Object.keys(document.redactions).length ? (
-              <div className={css.downloadButtons}>
-                <Button inverted onClick={clearReds}>
-                  Clear Redaction
+              document.redactions &&
+              Object.keys(document.redactions).length ? (
+                <div className={css.downloadButtons}>
+                  <Button inverted onClick={clearReds}>
+                    Clear Redaction
                 </Button>
-                <Button className={css.downloadRedacted} onClick={downloadRedacted}>
-                ⬇ Redacted Doc
+                  <Button className={css.downloadRedacted} onClick={downloadRedacted}>
+                    ⬇ Redacted Doc
                 </Button>
-              </div>
-            ) : null}
+                </div>
+              ) : null}
 
 
 
 
-              <div>
+            <div>
 
-              <Tabs
+              {/* <Tabs
               isTrackTab={true}
               selected={trackTab}
               track={track}
@@ -346,7 +346,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 { id: 'complianceTrack', title: 'Compliance'},
                 { id: 'workflowTrack', title: 'Workflow Automation'}
               ]}
-            />
+            /> */}
             </div>
           </div>
           <div className={cs(css.searchBarWrapper, tab === 'search' && css.visible)}>
@@ -369,14 +369,14 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 tab === 'search'
                   ? wordsMatchingSearch
                   : tab === 'text'
-                  ? pageLinesAsMarks
-                  : tab === 'kv'
-                  ? pagePairsAsMarks
-                  : tab === 'entities'
-                  ? (document.highlights || [])
-                  : tab === 'medical_entities'
-                  ? (document.highlights || [])
-                  : []
+                    ? pageLinesAsMarks
+                    : tab === 'kv'
+                      ? pagePairsAsMarks
+                      : tab === 'entities'
+                        ? (document.highlights || [])
+                        : tab === 'medical_entities'
+                          ? (document.highlights || [])
+                          : []
               }
               tables={tab === 'tables' && pageData.tables}
               highlightedMark={highlightedKv}
@@ -385,7 +385,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
             <div
               className={cs(
                 css.sidebar,
-                (tab === 'kv' || tab === 'text' || tab === 'entities' || tab ==='medical_entities' || tab === 'search' ||tab === 'text'||tab === 'tables') && css.visible
+                (tab === 'kv' || tab === 'text' || tab === 'entities' || tab === 'medical_entities' || tab === 'search' || tab === 'text' || tab === 'tables') && css.visible
               )}
             >
               <KeyValueList
@@ -405,7 +405,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 document={document}
                 pageCount={pageCount}
                 visible={tab === 'search'}
-                track = {track}
+                track={track}
               />
 
               <RawTextLines
@@ -418,45 +418,45 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
               />
 
               <EntitiesCheckbox
-                 entities={docData.entities}
-                 pageCount={pageCount}
-                 currentPageNumber={currentPageNumber}
-                 showRedaction={track === 'redaction'}
-                 onHighlight={highlightEntities}
-                 onSwitchPage={switchPage}
-                 onRedact={redactEntityMatches}
-                 onRedactAll={redactAllValues}
-                 onDownload={downloadKV}
-                 visible={tab === 'entities'}
-                 comprehendService={COMPREHEND_SERVICE}
-                 onDownloadPrimary = {downloadEntities}
-                 onDownloadSecondary = {null}
-                 document = {document}
+                entities={docData.entities}
+                pageCount={pageCount}
+                currentPageNumber={currentPageNumber}
+                showRedaction={track === 'redaction'}
+                onHighlight={highlightEntities}
+                onSwitchPage={switchPage}
+                onRedact={redactEntityMatches}
+                onRedactAll={redactAllValues}
+                onDownload={downloadKV}
+                visible={tab === 'entities'}
+                comprehendService={COMPREHEND_SERVICE}
+                onDownloadPrimary={downloadEntities}
+                onDownloadSecondary={null}
+                document={document}
               />
 
               <EntitiesCheckbox
-                 entities={docData.medicalEntities}
-                 pageCount={pageCount}
-                 currentPageNumber={currentPageNumber}
-                 showRedaction={track === 'redaction'}
-                 onHighlight={highlightEntities}
-                 onSwitchPage={switchPage}
-                 onRedact={redactEntityMatches}
-                 onRedactAll={redactAllValues}
-                 onDownloadPrimary={downloadMedicalEntities}
-                 onDownloadSecondary = {downloadMedicalICD10Ontologies}
-                 visible={tab === 'medical_entities'}
-                 comprehendService={COMPREHEND_MEDICAL_SERVICE}
-                 document = {document}
+                entities={docData.medicalEntities}
+                pageCount={pageCount}
+                currentPageNumber={currentPageNumber}
+                showRedaction={track === 'redaction'}
+                onHighlight={highlightEntities}
+                onSwitchPage={switchPage}
+                onRedact={redactEntityMatches}
+                onRedactAll={redactAllValues}
+                onDownloadPrimary={downloadMedicalEntities}
+                onDownloadSecondary={downloadMedicalICD10Ontologies}
+                visible={tab === 'medical_entities'}
+                comprehendService={COMPREHEND_MEDICAL_SERVICE}
+                document={document}
               />
 
               <TableResults
-                 tables={docData.tables}
-                 pageCount={pageCount}
-                 currentPageNumber={currentPageNumber}
-                 onSwitchPage={switchPage}
-                 visible={tab === 'tables'}
-                 document = {document}
+                tables={docData.tables}
+                pageCount={pageCount}
+                currentPageNumber={currentPageNumber}
+                onSwitchPage={switchPage}
+                visible={tab === 'tables'}
+                document={document}
               />
             </div>
           </div>

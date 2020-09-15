@@ -55,13 +55,13 @@ function SearchTypeTabs({ selectedSearch, setSelectedSearch }) {
 
   return (
     <div className={styles.wrapper}>
-      <a
+      {/* <a
         className={cs(styles.tab, selectedSearch === "es" && styles.selected)}
         onClick={selectES}
       >
         Elasticsearch
         <span>Keyword Search Results</span>
-      </a>
+      </a> */}
       <a
         className={cs(
           styles.tab,
@@ -72,7 +72,7 @@ function SearchTypeTabs({ selectedSearch, setSelectedSearch }) {
         Amazon Kendra
         <span>Semantic Search Results</span>
       </a>
-      {canShowSideBySide ? (
+      {/* {  ? (
         <a
           className={cs(
             styles.tab,
@@ -83,7 +83,7 @@ function SearchTypeTabs({ selectedSearch, setSelectedSearch }) {
           Elasticsearch and Amazon Kendra
           <span>Compare Search Technologies</span>
         </a>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
