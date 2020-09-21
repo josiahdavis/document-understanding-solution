@@ -14,8 +14,8 @@ then
     #aws s3 sync s3://$CovidDataBucketName/documents/HealthcareProvider/pdf/  s3://$BulkProcessingBucketName/documentDrop/
     #aws s3 sync s3://$CovidDataBucketName/documents/Scientist/pdf/  s3://$BulkProcessingBucketName/documentDrop/
 
-    aws s3 sync s3://$CovidDataBucketName/documents/Wiki/policy/  s3://$BulkProcessingBucketName/kendraPolicyDrop/
-    aws s3 sync s3://$CovidDataBucketName/documents/Wiki/pdf/  s3://$BulkProcessingBucketName/documentDrop/
+    aws s3 sync s3://$CovidDataBucketName/documents/Wiki_small/policy/  s3://$BulkProcessingBucketName/kendraPolicyDrop/
+    aws s3 sync s3://$CovidDataBucketName/documents/Wiki_small/pdf/  s3://$BulkProcessingBucketName/documentDrop/
 
 fi
 
