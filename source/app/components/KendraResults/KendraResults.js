@@ -115,7 +115,7 @@ export default function KendraResults({
           </div>
         )}*/}
 
-        {showPersonaSelector && <PersonaSelector />}
+        {/* {showPersonaSelector && <PersonaSelector />} */}
       </nav>
 
       <div className={css.resultContainer}>
