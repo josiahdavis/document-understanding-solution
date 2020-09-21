@@ -313,7 +313,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 { id: 'kv', title: `Key-Value Pairs` },
                 { id: 'tables', title: `Tables` },
                 { id: 'entities', title: `Entities` },
-                { id: 'medical_entities', title: `Medical Entities` },
+                // { id: 'medical_entities', title: `Medical Entities` },
               ]}
             />
 
@@ -336,7 +336,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
 
               <div>
 
-              <Tabs
+              {/* <Tabs
               isTrackTab={true}
               selected={trackTab}
               track={track}
@@ -346,7 +346,7 @@ function Document({ currentPageNumber, dispatch, id, document, pageTitle, search
                 { id: 'complianceTrack', title: 'Compliance'},
                 { id: 'workflowTrack', title: 'Workflow Automation'}
               ]}
-            />
+            /> */}
             </div>
           </div>
           <div className={cs(css.searchBarWrapper, tab === 'search' && css.visible)}>
