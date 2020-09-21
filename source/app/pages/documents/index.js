@@ -117,7 +117,7 @@ function Documents({
 
   useEffect(() => {
     doSearch(searchQuery)
-  }, [ searchQuery, doSearch ]);
+  }, [searchQuery, doSearch]);
 
   let files = documents.map(
     ({ documentId, documentName, documentStatus, documentCreatedOn, documentCompletedOn }) => {
@@ -128,7 +128,7 @@ function Documents({
         id: documentId,
         title: documentName,
         link: makeDocumentLink(documentId),
-        documentStatus : documentStatus,
+        documentStatus: documentStatus,
         uploadedTime,
         processedTime,
       }
@@ -142,7 +142,7 @@ function Documents({
     dispatch(setHeaderProps({
       showNavigation: !!searchQuery
     }))
-  }, [ searchQuery ])
+  }, [searchQuery])
 
   if (documentsTotal === 0 && status === 'success') {
     return (
@@ -173,7 +173,7 @@ function Documents({
             'Can someone who had COVID-19 spread the illness?',
             'Treatment options for COVID-19'
           ]}
-          placeholder={ENABLE_KENDRA ? 'Type a question related to COVID-19' : null}
+          placeholder={ENABLE_KENDRA ? 'Type a question here' : null}
         />
       </div>
 
@@ -211,11 +211,11 @@ function Documents({
       {searchQuery && <>
 
         <div>
-          { ENABLE_KENDRA ?
+          {ENABLE_KENDRA ?
             <SearchTypeTabs />
-          : null }
+            : null}
           <div className={css.searchResultContainer}>
-            { !ENABLE_KENDRA || selectedSearch === 'es' || selectedSearch === 'both' ?
+            {!ENABLE_KENDRA || selectedSearch === 'es' || selectedSearch === 'both' ?
               <SearchResults
                 results={searchResults}
                 searchStatus={searchStatus}
@@ -224,7 +224,7 @@ function Documents({
                 searchTotalMatches={searchTotalMatches}
                 isComparing={selectedSearch === 'both'}
               />
-            : null }
+              : null}
 
             {selectedSearch === 'both' &&
               <TooltipButton
@@ -240,7 +240,7 @@ function Documents({
               </TooltipButton>
             }
 
-            { ENABLE_KENDRA && (selectedSearch === 'kendra' || selectedSearch === 'both') ?
+            {ENABLE_KENDRA && (selectedSearch === 'kendra' || selectedSearch === 'both') ?
               <KendraResults
                 results={kendraResults}
                 filteredResults={kendraFilteredResults}
@@ -254,13 +254,13 @@ function Documents({
                 showPersonaSelector={selectedSearch === 'kendra'}
                 isComparing={selectedSearch === 'both'}
               />
-            : null }
+              : null}
 
             {searchStatus === 'pending' && isQueryLongEnough && <Loading />}
 
           </div>
         </div>
-      </> }
+      </>}
     </div>
   )
 }

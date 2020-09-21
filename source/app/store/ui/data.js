@@ -16,7 +16,7 @@ import { lensPath } from 'ramda'
 
 export default {
   selectedTrack: 'search',
-  selectedSearch: 'es',
+  selectedSearch: 'kendra',
   headerProps: {},
 }
 
