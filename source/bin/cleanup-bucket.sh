@@ -19,3 +19,4 @@ for i in ${s3cdk}
 do
     echo "Deleting ${i}..."
     aws s3 rb "s3://${i}" --force
+done
