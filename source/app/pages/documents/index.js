@@ -167,11 +167,11 @@ function Documents({
           className={css.searchBar}
           light
           suggestions={ENABLE_KENDRA && [
-            'Where can I get tested for COVID-19?',
-            'What are the symptoms of COVID-19?',
-            'Preventing COVID-19 spread',
-            'Can someone who had COVID-19 spread the illness?',
-            'Treatment options for COVID-19'
+            'Where was Daniel Radcliffe born?',
+            'Who was involved in Battle of the Hongorai River?',
+            'When did Australia enter World War 2?',
+            'When did the The Boxer Rebellion in China begin?',
+            'Who is Frank Headlam?'
           ]}
           placeholder={ENABLE_KENDRA ? 'Type a question here' : null}
         />
